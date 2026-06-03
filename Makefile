@@ -26,3 +26,13 @@ db-reset:
 
 db-truncate:
 	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE bronze.emission_factors, bronze.estimates RESTART IDENTITY;"
+
+db-reset-s:
+	$(PSQL) -U ryansiebert -d climatiq_pipeline -f sql/999_reset_silver.sql
+	$(PSQL) -U ryansiebert -d climatiq_pipeline -f sql/003_silver_schema.sql
+
+db-truncate-s:
+	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE silver.emission_factors, silver.estimates RESTART IDENTITY;"
+
+  transform:
+	env $(shell cat .env | xargs) .venv/bin/python src/transformation.py

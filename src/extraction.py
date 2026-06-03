@@ -13,7 +13,26 @@ RECORD_CAP = 500
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-SECTORS = ["Energy", "Transport", "Agriculture", "Manufacturing"]
+SECTORS = ["Energy", "Transport"]
+# SECTORS = [
+#     "Agriculture/Hunting/Forestry/Fishing",
+#     "Buildings and Infrastructure",
+#     "Consumer Goods and Services",
+#     "Education",
+#     "Energy",
+#     "Equipment",
+#     "Health and Social Care",
+#     "Information and Communication",
+#     "Insurance and Financial Services",
+#     "Land Use",
+#     "Materials and Manufacturing",
+#     "Organizational Activities",
+#     "Refrigerants and Fugitive Gases",
+#     "Restaurants and Accommodation",
+#     "Transport",
+#     "Waste",
+#     "Water",
+# ]
 
 
 def search_emission_factors(

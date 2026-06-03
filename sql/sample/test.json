@@ -1,0 +1,92 @@
+[
+    {
+        "id": "1ca718be-b4e6-41df-8ff4-5f54ed349c9e",
+        "activity_id": "cooling-type_district_chilled_water-tech_absorption_chiller-fuel_natural_gas",
+        "name": "District chilled water - absorption chiller using natural gas",
+        "sector": "Energy",
+        "category": "Cooling",
+        "source": "EPA",
+        "source_dataset": "Energy Star - Portfolio Manager",
+        "source_link": "https://portfoliomanager.energystar.gov/pdf/reference/Emissions.pdf",
+        "source_lca_activity": "use_phase",
+        "year": 2024,
+        "year_released": 2024,
+        "region": "CA",
+        "region_name": "Canada",
+        "unit_type": "Energy",
+        "unit": "kg/MMBTU",
+        "supported_calculation_methods": [
+            "ar4"
+        ],
+        "factor": null,
+        "factor_calculation_method": null,
+        "factor_calculation_origin": null,
+        "constituent_gases": {
+            "co2e_total": null,
+            "co2e_other": null,
+            "co2": null,
+            "ch4": null,
+            "n2o": null
+        },
+        "additional_indicators": {},
+        "data_version": {
+            "status": "up_to_date"
+        },
+        "data_version_information": {
+            "status": "up_to_date"
+        },
+        "scopes": [
+            "2"
+        ],
+        "uncertainty": null,
+        "description": "Emission intensity for district chilled water - absorption chiller using natural gas. Published by Energy Star - Portfolio Manager under EPA. Retrived from Figure 3 - Indirect GHG Emissions Factors for all District Fuels at the source URL.",
+        "data_quality_flags": [],
+        "access_type": "public",
+        "_sector": "Energy"
+    },
+    {
+        "id": "5ecdacc2-af0a-4d8d-b6df-916e9d32aa97",
+        "activity_id": "cooling-type_district_chilled_water-tech_absorption_chiller-fuel_natural_gas",
+        "name": "District chilled water - absorption chiller using natural gas",
+        "sector": "Energy",
+        "category": "Cooling",
+        "source": "EPA",
+        "source_dataset": "Energy Star - Portfolio Manager",
+        "source_link": "https://portfoliomanager.energystar.gov/pdf/reference/Emissions.pdf",
+        "source_lca_activity": "use_phase",
+        "year": 2024,
+        "year_released": 2024,
+        "region": "US",
+        "region_name": "United States of America (the)",
+        "unit_type": "Energy",
+        "unit": "kg/MMBTU",
+        "supported_calculation_methods": [
+            "ar4"
+        ],
+        "factor": null,
+        "factor_calculation_method": null,
+        "factor_calculation_origin": null,
+        "constituent_gases": {
+            "co2e_total": null,
+            "co2e_other": null,
+            "co2": null,
+            "ch4": null,
+            "n2o": null
+        },
+        "additional_indicators": {},
+        "data_version": {
+            "status": "up_to_date"
+        },
+        "data_version_information": {
+            "status": "up_to_date"
+        },
+        "scopes": [
+            "2"
+        ],
+        "uncertainty": null,
+        "description": "Emission intensity for district chilled water - absorption chiller using natural gas. Published by Energy Star - Portfolio Manager under EPA. Retrived from Figure 3 - Indirect GHG Emissions Factors for all District Fuels at the source URL.",
+        "data_quality_flags": [],
+        "access_type": "public",
+        "_sector": "Energy"
+    }
+]

@@ -1,0 +1,2438 @@
+{
+  "info": {
+    "_postman_id": "32474245-d832-421e-b11a-e610e53718cc",
+    "name": "Climatiq",
+    "description": "# Climatiq API Reference\n\nClimatiq helps you calculate the environmental footprint created by a broad range of emission-generating activities.\n\nWe simplify the process of converting your operational activity data into CO2e (carbon dioxide equivalent) estimates, allowing you to understand your impact on the environment and identify actions to manage and reduce it.\n\nOperational activity data can be generated from any actions that result in greenhouse gas emissions, including vehicle rides, energy consumption, flights, logistical operations, manufacturing, agriculture, heating or cooling of buildings, and countless other daily activities.\n\nUsing the Climatiq REST API, you can take data from your software and systems and automatically transform that it into CO2e values, using emission factors from a range of validated sources available in the Open Emission Factor Database ([OEFDB](https://github.com/climatiq/Open-Emission-Factors-DB)).\n\n**Read more:**\n\n- [<b>Quickstart</b>](https://www.climatiq.io/docs/guides/quickstart) - Make your first CO2e estimate with the Climatiq API\n    \n- [<b>How-To Guides</b>](https://www.climatiq.io/docs/guides) - Get help with everything from getting an API key to mapping activities onto emission factors\n    \n- [<b>Data Explorer</b>](https://www.climatiq.io/explorer) - Find the right emission factors for your project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55364857",
+    "_collection_link": "https://go.postman.co/collection/24714653-32474245-d832-421e-b11a-e610e53718cc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Estimate",
+      "item": [
+        {
+          "name": "With activity ID",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"emission_factor\": {\n        \"activity_id\": \"electricity-supply_grid-source_production_mix\",\n        \"data_version\":\"{{DATA_VERSION}}\"\n    },\n    \"parameters\": {\n        \"energy\": 100,\n        \"energy_unit\": \"kWh\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "With private activity ID",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"emission_factor\": {\n        \"activity_id\": \"other_materials-type_custom_material\",\n        \"data_version\":\"{{DATA_VERSION}}\"\n    },\n    \"parameters\": {\n        \"weight\": 100,\n        \"weight_unit\": \"kg\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "With activity ID and year",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"emission_factor\": {\n        \"activity_id\": \"electricity-supply_grid-source_supplier_mix\",\n        \"data_version\":\"{{DATA_VERSION}}\",\n        \"region\": \"AT\",\n        \"year\": 1991\n    },\n    \"parameters\": {\n        \"energy\": 100,\n        \"energy_unit\": \"kWh\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "With activity ID and source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"emission_factor\": {\n        \"activity_id\": \"electricity-supply_grid-source_residual_mix\",\n        \"data_version\":\"{{DATA_VERSION}}\",\n        \"region\": \"BE\",\n\t\t\"source\": \"AIB\"\n    },\n    \"parameters\": {\n        \"energy\": 100,\n        \"energy_unit\": \"kWh\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "With ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{API_KEY}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"emission_factor\": {\n        \"id\": \"075b570e-62d2-40f7-89e2-252a2ed547c0\"\n    },\n    \"parameters\": {\n        \"energy\": 100,\n        \"energy_unit\": \"kWh\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "With activity ID and LCA activity",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"emission_factor\": {\n        \"activity_id\": \"electricity-supply_grid-source_residual_mix\",\n        \"data_version\":\"{{DATA_VERSION}}\",\n        \"region\": \"SE\",\n\t\t\"source_lca_activity\": \"electricity_generation\"\n    },\n    \"parameters\": {\n        \"energy\": 100,\n        \"energy_unit\": \"kWh\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "## Estimate\n\nEstimation operations are performed to calculate emissions produced by one or more activities, based on multiplying activity data by the appropriate emission factors.\n\nCalculate total estimated emissions produced for a particular activity, in \\`kgCO2e\\`\\`, using the available emission factors. All requests are performed by sending a POST request to the following endpoint:"
+    },
+    {
+      "name": "Batch Estimation",
+      "item": [
+        {
+          "name": "With activity ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n    {\n        \"emission_factor\": {\n            \"activity_id\": \"passenger_vehicle-vehicle_type_car-fuel_source_na-engine_size_na-vehicle_age_na-vehicle_weight_na\",\n            \"data_version\":\"{{DATA_VERSION}}\"\n        },\n        \"parameters\": {\n            \"distance\": 100,\n            \"distance_unit\": \"km\"\n        }\n    },\n    {\n        \"emission_factor\": {\n            \"activity_id\": \"consumer_goods-type_snack_foods\",\n            \"data_version\":\"{{DATA_VERSION}}\"\n        },\n        \"parameters\": {\n            \"money\": 15,\n            \"money_unit\": \"usd\"\n        }\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/estimate/batch",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "estimate",
+                "batch"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "With private activity ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n    {\n        \"emission_factor\": {\n            \"activity_id\": \"other_materials-type_custom_material\",\n            \"data_version\":\"{{DATA_VERSION}}\"\n        },\n        \"parameters\": {\n            \"weight\": 100,\n            \"weight_unit\": \"kg\"\n        }\n    },\n    {\n        \"emission_factor\": {\n            \"activity_id\": \"consumer_goods-type_snack_foods\",\n            \"data_version\":\"{{DATA_VERSION}}\"\n        },\n        \"parameters\": {\n            \"money\": 15,\n            \"money_unit\": \"usd\"\n        }\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/estimate/batch",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "estimate",
+                "batch"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "With activity ID and region",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"emission_factor\": {\n        \"activity_id\": \"electricity-supply_grid-source_residual_mix\",\n        \"data_version\":\"{{DATA_VERSION}}\",\n\t\t\"region\": \"US\"\n    },\n    \"parameters\": {\n        \"energy\": 100,\n        \"energy_unit\": \"kWh\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "## Batch estimations\n\nBatch estimations can be used to calculate multiple emission estimations in a single request. Currently limited to maximum 100 operations per request."
+    },
+    {
+      "name": "Emission Factors Data",
+      "item": [
+        {
+          "name": "Search Emission Factors",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/search?query=Passenger Car&data_version={{DATA_VERSION}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "Passenger Car"
+                },
+                {
+                  "key": "data_version",
+                  "value": "{{DATA_VERSION}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Emission Factors By Activity ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/search?activity_id=fuel-type_natural_gas-fuel_use_industrial&data_version={{DATA_VERSION}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "activity_id",
+                  "value": "fuel-type_natural_gas-fuel_use_industrial"
+                },
+                {
+                  "key": "data_version",
+                  "value": "{{DATA_VERSION}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Emission Factors With Filters",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/search?sector=Energy&data_version={{DATA_VERSION}}&year=2015&category=Electricity&source=GEMIS&region=DE&unit_type=Energy&source_lca_activity=upstream-use_phase-transport&calculation_method=ar4&allowed_data_quality_flags=none&access_type=public&page=2&results_per_page=5",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "sector",
+                  "value": "Energy"
+                },
+                {
+                  "key": "data_version",
+                  "value": "{{DATA_VERSION}}"
+                },
+                {
+                  "key": "year",
+                  "value": "2015"
+                },
+                {
+                  "key": "category",
+                  "value": "Electricity"
+                },
+                {
+                  "key": "source",
+                  "value": "GEMIS"
+                },
+                {
+                  "key": "region",
+                  "value": "DE"
+                },
+                {
+                  "key": "unit_type",
+                  "value": "Energy"
+                },
+                {
+                  "key": "source_lca_activity",
+                  "value": "upstream-use_phase-transport"
+                },
+                {
+                  "key": "calculation_method",
+                  "value": "ar4"
+                },
+                {
+                  "key": "allowed_data_quality_flags",
+                  "value": "none"
+                },
+                {
+                  "key": "access_type",
+                  "value": "public"
+                },
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "results_per_page",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all unit types",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/data-versions",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "data-versions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Data Versions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/data/v1/unit-types",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "data",
+                "v1",
+                "unit-types"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "The Climatiq API can be queried for emission factors and metadata in a number of ways, outlined below."
+    },
+    {
+      "name": "Freight Transport",
+      "item": [
+        {
+          "name": "Road",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"route\": [\n        {\n            \"location\": {\n                \"query\": \"Hamburg\"\n            }\n        },\n        {\n            \"transport_mode\": \"road\",\n            \"leg_details\": {\n                \"rest_of_world\": {\n                    \"vehicle_type\": \"van\",\n                    \"vehicle_weight\": \"lte_3.5t\",\n                    \"fuel_source\": \"petrol\"\n                },\n                \"north_america\": {\n                    \"vehicle_type\": \"moving\"\n                }\n            }\n        },\n        {\n            \"location\": {\n                \"query\": \"Berlin\"\n            }\n        }\n    ],\n    \"cargo\": {\n        \"weight\": 10,\n        \"weight_unit\": \"t\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/freight/v2/intermodal",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "freight",
+                "v2",
+                "intermodal"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sea",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"route\": [\n        {\n            \"location\": {\n                \"query\": \"Hamburg\"\n            }\n        },\n        {\n            \"transport_mode\": \"sea\",\n            \"leg_details\": {\n                \"vessel_type\": \"container_reefer_refrigerated\"\n            }\n        },\n        {\n            \"location\": {\n                \"query\": \"London\"\n            }\n        }\n    ],\n    \"cargo\": {\n        \"weight\": 10,\n        \"weight_unit\": \"t\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/freight/v2/intermodal",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "freight",
+                "v2",
+                "intermodal"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Air",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"route\": [\n        { \"location\": { \"query\": \"Hamburg\" } },\n        {\n            \"transport_mode\": \"air\",\n            \"leg_details\": {\n                \"aircraft_type\": \"freighter\"\n            }\n        },\n        { \"location\": { \"query\": \"London City Airport\" } }\n    ],\n    \"cargo\": {\n        \"weight\": 10,\n        \"weight_unit\": \"t\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/freight/v2/intermodal",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "freight",
+                "v2",
+                "intermodal"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Rail",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"route\": [\n        {\n            \"location\": {\n                \"query\": \"Hamburg\"\n            }\n        },\n        {\n            \"transport_mode\": \"rail\",\n            \"leg_details\": {\n                \"fuel_source\": \"electricity\"\n            }\n        },\n        {\n            \"location\": {\n                \"query\": \"London Victoria\"\n            }\n        }\n    ],\n    \"cargo\": {\n        \"weight\": 10,\n        \"weight_unit\": \"t\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/freight/v2/intermodal",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "freight",
+                "v2",
+                "intermodal"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "## Freight Flights\n\nCalculate total estimated emissions produced by freight transport\n\n- Road\n    \n- Sea\n    \n- Air\n    \n- Rail"
+    },
+    {
+      "name": "Procurement",
+      "item": [
+        {
+          "name": "Procurement",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activity\": {\n        \"classification_code\": \"25\",\n        \"classification_type\": \"isic4\"\n    },\n    \"spend_year\": 2022,\n    \"spend_region\": \"DE\",\n    \"money\": 100,\n    \"money_unit\": \"eur\",\n    \"tax_margin\": 0.2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/procurement/v1/spend",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "procurement",
+                "v1",
+                "spend"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Procurement Batch",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n    {\n        \"activity\": {\n            \"classification_code\": \"25\",\n            \"classification_type\": \"isic4\"\n        },\n        \"spend_year\": 2022,\n        \"spend_region\": \"DE\",\n        \"money\": 100,\n        \"money_unit\": \"eur\",\n        \"tax_margin\": 0.2\n    },\n    {\n        \"activity\": {\n            \"classification_code\": \"25\",\n            \"classification_type\": \"isic4\"\n        },\n        \"spend_year\": 2020,\n        \"spend_region\": \"ES\",\n        \"money\": 200,\n        \"money_unit\": \"eur\",\n        \"tax_margin\": 0.3\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/procurement/v1/spend/batch",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "procurement",
+                "v1",
+                "spend",
+                "batch"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Spend-based estimations for purchased goods and services (GHG Protocol Category 3.1)"
+    },
+    {
+      "name": "Classifications",
+      "item": [
+        {
+          "name": "Estimate using isic4",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"classification\": {\n        \"classification_code\": \"25\",\n        \"classification_type\": \"isic4\"\n    },\n    \"parameters\": {\n        \"money\": 1,\n        \"money_unit\": \"usd\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/classifications/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "classifications",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Estimate using isic4 and source filter",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"classification\": {\n        \"classification_code\": \"25\",\n        \"classification_type\": \"isic4\",\n        \"source\": \"EXIOBASE\"\n    },\n    \"parameters\": {\n        \"money\": 1,\n        \"money_unit\": \"usd\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/classifications/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "classifications",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Estimate using isic4 and region fallback",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"classification\": {\n        \"classification_code\": \"25\",\n        \"classification_type\": \"isic4\",\n        \"region_fallback\": true,\n        \"region\": \"IS\"\n    },\n    \"parameters\": {\n        \"money\": 1,\n        \"money_unit\": \"usd\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/classifications/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "classifications",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Estimate using nace2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"classification\": {\n        \"classification_code\": \"6.2\",\n        \"classification_type\": \"nace2\"\n    },\n    \"parameters\": {\n        \"money\": 1,\n        \"money_unit\": \"usd\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/classifications/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "classifications",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Estimate using nace2 and region fallback",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"classification\": {\n        \"classification_code\": \"6.2\",\n        \"classification_type\": \"nace2\"\n    },\n    \"parameters\": {\n        \"money\": 1,\n        \"money_unit\": \"usd\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/classifications/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "classifications",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "## [Classifications](https://www.climatiq.io/docs#classifications)\n\nMany sources link [emission factors](https://www.climatiq.io/explorer) to specific industry classification schemes, and Climatiq makes it possible to select an emission factor based on these industry classification codes. Please see below the list of mappings we currently support, with the datasets that are mapped directly to them (note that the API will also map factors indirectly via the [UN correspondence tables](https://unstats.un.org/unsd/classifications/Econ/isic)):\n\n| INDUSTRY CLASSIFICATION CODE | PRIMARY DATASET |\n| --- | --- |\n| [<b>ISIC Rev. 4</b>](https://unstats.un.org/unsd/classifications/Econ/isic) | [<b>GHG Protocol</b>](https://www.climatiq.io/explorer?source=GHG+Protocol&unit_type=Money) **(via ISIC 3.1)** |\n| [<b>NACE Rev. 2</b>](https://ec.europa.eu/eurostat/web/nace-rev2) | [<b>EXIOBASE3</b>](https://www.climatiq.io/explorer?source=EXIOBASE) |\n\nFor a more in-depth view on how Climatiq works with classification schemes, [view the classification guide](https://www.climatiq.io/docs/guides/classification-codes-intro).\n\n## [Estimate](https://www.climatiq.io/docs#classifications-estimate)\n\nCalculate total estimated emissions produced for a particular activity, as described by an industry classification scheme such as [ISIC](https://en.wikipedia.org/wiki/International_Standard_Industrial_Classification) or [NACE](https://en.wikipedia.org/wiki/Statistical_Classification_of_Economic_Activities_in_the_European_Community).\n\nThis endpoint lets you specify an industry classification code and have Climatiq automatically select the appropriate emission factor.\n\nOne industry code might be linked to more than one emission factor. If that happens, Climatiq will automatically select the most conservative emission factor. If you would like to specify exactly what emission factor to use, you can specify other attributes to filter on, such as `year`, `source` or `region`.\n\nIndustry classification codes can also be mapped to each other using the [UN correspondence tables](https://unstats.un.org/unsd/classifications/Econ/isic), allowing Climatiq to return emission factors from other classification schemes that represent the same activity if there isn't one found directly; this may happen for example because of different classification taxonomies being used in different geographies or by different data sources.\n\nAs with any estimation endpoint, the emission factor must be provided with parameters, such as weight, volume, energy. These are provided through the `parameters` field. See the [estimate endpoint](https://www.climatiq.io/docs#estimate) for more details on how parameters and units work.\n\n####"
+    },
+    {
+      "name": "Cloud Computing",
+      "item": [
+        {
+          "name": "Metadata",
+          "item": [
+            {
+              "name": "Get cloud computing metadata",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{API_KEY}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/compute/v1/metadata",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "compute",
+                    "v1",
+                    "metadata"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "### [Metadata](https://www.climatiq.io/docs#metadata)\n\nReturns metadata, such as what sort of providers and regions are available for the different computing endpoints."
+        },
+        {
+          "name": "VM Instance",
+          "item": [
+            {
+              "name": "Estimate VM Instance",
+              "request": {
+                "auth": {
+                  "type": "no"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{API_KEY}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"instance\": \"a1_v2\",\n    \"region\": \"uk_west\",\n    \"duration\": 1,\n    \"duration_unit\": \"h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/compute/v1/azure/instance",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "compute",
+                    "v1",
+                    "azure",
+                    "instance"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Batch Estimate VM Instance",
+              "request": {
+                "auth": {
+                  "type": "no"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{API_KEY}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n    {\n        \"instance\": \"a2_v2\",\n        \"region\": \"uk_west\",\n        \"duration\": 3,\n        \"duration_unit\": \"h\"\n    },\n    {\n        \"instance\": \"a1_v2\",\n        \"region\": \"uk_west\",\n        \"duration\": 1,\n        \"duration_unit\": \"h\"\n    }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/compute/v1/azure/instance/batch",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "compute",
+                    "v1",
+                    "azure",
+                    "instance",
+                    "batch"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CPU",
+          "item": [
+            {
+              "name": "Estimate CPU usage",
+              "request": {
+                "auth": {
+                  "type": "no"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{API_KEY}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"cpu_count\": 1,\n    \"region\": \"uk_west\",\n    \"cpu_load\": 1,\n    \"duration\": 1,\n    \"duration_unit\": \"h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/compute/v1/azure/cpu",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "compute",
+                    "v1",
+                    "azure",
+                    "cpu"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Batch estimate CPU usage",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{API_KEY}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n    {\n        \"cpu_count\": 1,\n        \"region\": \"uk_west\",\n        \"cpu_load\": 1,\n        \"duration\": 1,\n        \"duration_unit\": \"h\"\n    },\n    {\n        \"cpu_count\": 1,\n        \"region\": \"germany\",\n        \"cpu_load\": 0.5,\n        \"duration\": 1,\n        \"duration_unit\": \"h\"\n    }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/compute/v1/azure/cpu/batch",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "compute",
+                    "v1",
+                    "azure",
+                    "cpu",
+                    "batch"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "### [CPU](https://www.climatiq.io/docs#cpu)\n\nCalculate total estimated emissions based on the usage for a set number of virtual CPU's (vCPUs).\n\n`:provider` path argument must be replaced with the id of the supported cloud providers. You can retrieve the different ids from the [computing metadata endpoint](https://www.climatiq.io/docs#metadata)"
+        },
+        {
+          "name": "Storage",
+          "item": [
+            {
+              "name": "Estimate storage usage",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{API_KEY}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"region\": \"af_south_1\",\n    \"storage_type\": \"ssd\",\n    \"data\": 50,\n    \"data_unit\": \"GB\",\n    \"duration\": 1,\n    \"duration_unit\": \"day\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/compute/v1/aws/storage",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "compute",
+                    "v1",
+                    "aws",
+                    "storage"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Batch estimate storage usage",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{API_KEY}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n    {\n        \"region\": \"af_south_1\",\n        \"storage_type\": \"ssd\",\n        \"data\": 50,\n        \"data_unit\": \"GB\",\n        \"duration\": 1,\n        \"duration_unit\": \"day\"\n    },\n    {\n        \"region\": \"ap_east_1\",\n        \"storage_type\": \"ssd\",\n        \"data\": 150,\n        \"data_unit\": \"GB\",\n        \"duration\": 1,\n        \"duration_unit\": \"day\"\n    }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/compute/v1/aws/storage/batch",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "compute",
+                    "v1",
+                    "aws",
+                    "storage",
+                    "batch"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "### [Storage](https://www.climatiq.io/docs#storage)\n\nPOST Calculate total estimated emissions based on storing data for a set amount of time.\n\n`:provider` path argument must be replaced with the id of the supported cloud providers. You can retrieve the different ids from the [computing metadata endpoint](https://www.climatiq.io/docs#metadata)"
+        },
+        {
+          "name": "Memory",
+          "item": [
+            {
+              "name": "Estimate memory usage",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{API_KEY}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"region\": \"us_west_2\",\n    \"data\": 8,\n    \"data_unit\": \"GB\",\n    \"duration\": 24,\n    \"duration_unit\": \"h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/compute/v1/gcp/memory",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "compute",
+                    "v1",
+                    "gcp",
+                    "memory"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Batch estimate memory usage",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{API_KEY}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n    {\n        \"region\": \"us_west_2\",\n        \"data\": 8,\n        \"data_unit\": \"GB\",\n        \"duration\": 24,\n        \"duration_unit\": \"h\"\n    },\n    {\n        \"region\": \"us_west_1\",\n        \"data\": 16,\n        \"data_unit\": \"GB\",\n        \"duration\": 24,\n        \"duration_unit\": \"h\"\n    }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/compute/v1/gcp/memory/batch",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "compute",
+                    "v1",
+                    "gcp",
+                    "memory",
+                    "batch"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "### [Storage](https://www.climatiq.io/docs#storage)\n\nPOST Calculate total estimated emissions based on storing data for a set amount of time.\n\nThe `:provider` path argument must be replaced with the id of the supported cloud providers. You can retrieve the different ids from the [computing metadata endpoint](https://www.climatiq.io/docs#metadata)"
+        }
+      ],
+      "description": "## Cloud Computing\n\nClimatiq makes endpoints available to help you calculate the carbon footprint of the cloud resources you use. It will automatically select emission factors based on your cloud provider and region, so you get the right emission factor for your datacenter.\n\nAll the cloud computing endpoints expect you to provide the cloud provider in the url. Where the urls state `:provider` you must replace it with a supported cloud provider. You can view the supported cloud providers by using the [metadata endpoint](https://www.climatiq.io/docs#metadata)."
+    },
+    {
+      "name": "Custom Mappings",
+      "item": [
+        {
+          "name": "Estimate",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"custom_mapping\": {\n        \"label\": \"Electricity generation\",\n        \"data_version\":\"0.0\"\n    },\n    \"parameters\": {\n        \"energy\": 100,\n        \"energy_unit\": \"kWh\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/custom-mappings/v1/estimate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "custom-mappings",
+                "v1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Labels Copy",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data_version\": \"0.0\",\n  \"labels\": [\n    {\n        \"label\": \"Electricity generation\",\n        \"source\": [\"BEIS\"]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/custom-mappings/v1/labels",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "custom-mappings",
+                "v1",
+                "labels"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Batch estimate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n    {\n        \"custom_mapping\": {\n            \"label\": \"Electricity generation\",\n            \"data_version\":\"0.0\"\n        },\n        \"parameters\": {\n            \"energy\": 100,\n            \"energy_unit\": \"kWh\"\n        }\n    },\n    {\n        \"custom_mapping\": {\n            \"label\": \"Electricity generation\",\n            \"data_version\":\"0.0\"\n        },\n        \"parameters\": {\n            \"energy\": 200,\n            \"energy_unit\": \"kWh\"\n        }\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/custom-mappings/v1/batch",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "custom-mappings",
+                "v1",
+                "batch"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Use custom mapped activities from your Climatiq Dashboard to calculate emissions."
+    },
+    {
+      "name": "Energy",
+      "item": [
+        {
+          "name": "Electricity",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"year\": 2023,\n    \"region\": \"GB\",\n    \"amount\": {\n        \"energy\": 5000,\n        \"energy_unit\": \"kWh\"\n    },\n    \"recs\": {\n        \"energy\": 1000,\n        \"energy_unit\": \"kWh\"\n    },\n    \"components\": [\n        {\n            \"amount\": {\n                \"energy\": 1000,\n                \"energy_unit\": \"kWh\"\n            },\n            \"connection_type\": \"grid\",\n            \"supplier\": \"british_gas\"\n        },\n        {\n            \"amount\": {\n                \"energy\": 1000,\n                \"energy_unit\": \"kWh\"\n            },\n            \"connection_type\": \"direct\",\n            \"loss_factor\": 0.05,\n            \"energy_source\": \"natural_gas\"\n        },\n        {\n            \"amount\": {\n                \"energy\": 1000,\n                \"energy_unit\": \"kWh\"\n            },\n            \"connection_type\": \"direct\",\n            \"energy_source\": \"renewable\"\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/energy/v1/electricity",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "energy",
+                "v1",
+                "electricity"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Batch Electricity",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n    {\n        \"year\": 2023,\n        \"region\": \"GB\",\n        \"amount\": {\n            \"energy\": 5000,\n            \"energy_unit\": \"kWh\"\n        },\n        \"recs\": {\n            \"energy\": 1000,\n            \"energy_unit\": \"kWh\"\n        },\n        \"components\": [\n            {\n                \"amount\": {\n                    \"energy\": 1000,\n                    \"energy_unit\": \"kWh\"\n                },\n                \"connection_type\": \"grid\",\n                \"supplier\": \"british_gas\"\n            },\n            {\n                \"amount\": {\n                    \"energy\": 1000,\n                    \"energy_unit\": \"kWh\"\n                },\n                \"connection_type\": \"direct\",\n                \"loss_factor\": 0.05,\n                \"energy_source\": \"natural_gas\"\n            },\n            {\n                \"amount\": {\n                    \"energy\": 1000,\n                    \"energy_unit\": \"kWh\"\n                },\n                \"connection_type\": \"direct\",\n                \"energy_source\": \"renewable\"\n            }\n        ]\n    },\n    {\n        \"year\": 2021,\n        \"region\": \"GB\",\n        \"amount\": {\n            \"energy\": 2000,\n            \"energy_unit\": \"kWh\"\n        },\n        \"recs\": {\n            \"energy\": 3000,\n            \"energy_unit\": \"kWh\"\n        },\n        \"components\": [\n            {\n                \"amount\": {\n                    \"energy\": 1000,\n                    \"energy_unit\": \"kWh\"\n                },\n                \"connection_type\": \"grid\",\n                \"supplier\": \"british_gas\"\n            }\n        ]\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/energy/v1/electricity/batch",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "energy",
+                "v1",
+                "electricity",
+                "batch"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Heat & Steam",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"year\": 2021,\n    \"region\": \"DE\",\n    \"components\": [\n        {\n            \"amount\": {\n                \"energy\": 1000,\n                \"energy_unit\": \"kWh\"\n            },\n            \"loss_factor\": 0.06\n        },\n        {\n            \"amount\": {\n                \"energy\": 1000,\n                \"energy_unit\": \"kWh\"\n            },\n            \"loss_factor\": 0.1,\n            \"energy_source\": \"natural_gas\"\n        },\n        {\n            \"amount\": {\n                \"energy\": 1000,\n                \"energy_unit\": \"kWh\"\n            },\n            \"energy_source\": \"renewable\"\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/energy/v1/heat",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "energy",
+                "v1",
+                "heat"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Batch Heat & Steam",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n    {\n        \"year\": 2021,\n        \"region\": \"DE\",\n        \"components\": [\n            {\n                \"amount\": {\n                    \"energy\": 1000,\n                    \"energy_unit\": \"kWh\"\n                },\n                \"loss_factor\": 0.06\n            },\n            {\n                \"amount\": {\n                    \"energy\": 1000,\n                    \"energy_unit\": \"kWh\"\n                },\n                \"loss_factor\": 0.1,\n                \"energy_source\": \"natural_gas\"\n            },\n            {\n                \"amount\": {\n                    \"energy\": 1000,\n                    \"energy_unit\": \"kWh\"\n                },\n                \"energy_source\": \"renewable\"\n            }\n        ]\n    },\n    {\n        \"year\": 2021,\n        \"region\": \"DE\",\n        \"components\": [\n            {\n                \"amount\": {\n                    \"energy\": 1000,\n                    \"energy_unit\": \"kWh\"\n                },\n                \"loss_factor\": 0.06\n            },\n            {\n                \"amount\": {\n                    \"energy\": 1000,\n                    \"energy_unit\": \"kWh\"\n                },\n                \"loss_factor\": 0.1,\n                \"energy_source\": \"natural_gas\"\n            },\n            {\n                \"amount\": {\n                    \"energy\": 1000,\n                    \"energy_unit\": \"kWh\"\n                },\n                \"energy_source\": \"renewable\"\n            }\n        ]\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/energy/v1/heat/batch",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "energy",
+                "v1",
+                "heat",
+                "batch"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fuel",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fuel_type\": \"biodiesel_bio_100\",\n    \"amount\": {\n        \"volume\": 5000,\n        \"volume_unit\": \"l\"\n    },\n    \"region\": \"GB\",\n    \"year\": 2023\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/energy/v1/fuel",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "energy",
+                "v1",
+                "fuel"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Batch Fuel",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n    {\n        \"fuel_type\": \"biodiesel_bio_100\",\n        \"amount\": {\n            \"volume\": 5000,\n            \"volume_unit\": \"l\"\n        },\n        \"region\": \"GB\",\n        \"year\": 2023\n    },\n    {\n        \"fuel_type\": \"biodiesel_bio_100\",\n        \"amount\": {\n            \"volume\": 3000,\n            \"volume_unit\": \"l\"\n        },\n        \"region\": \"GB\",\n        \"year\": 2021\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/energy/v1/fuel/batch",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "energy",
+                "v1",
+                "fuel",
+                "batch"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Travel (Preview)",
+      "item": [
+        {
+          "name": "Distance-based method",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"origin\": {\n        \"locode\": \"DE-HAM\"\n    },\n    \"destination\": {\n        \"query\": \"Berlin\"\n    },\n    \"travel_mode\": \"car\",\n    \"car_details\": {\n        \"car_type\": \"plugin_hybrid\"\n   }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/travel/v1-preview1/distance",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "travel",
+                "v1-preview1",
+                "distance"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Distance-based with location query",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"origin\": {\n        \"query\": \"Grindelhof 28-30, Hamburg\",\n        \"country\": \"DE\",\n        \"postal_code\":\"20146\"\n    },\n    \"destination\": {\n        \"query\": \"Berlin\"\n    },\n    \"travel_mode\": \"car\",\n    \"car_details\": {\n        \"car_type\": \"plugin_hybrid\"\n   }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/travel/v1-preview1/distance",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "travel",
+                "v1-preview1",
+                "distance"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Spend-based method",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"spend_type\": \"air\",\n    \"money\": 100,\n    \"money_unit\": \"gbp\",\n    \"spend_location\": {\n        \"locode\": \"GB-LON\"\n    },\n    \"spend_year\": 2022\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/travel/v1-preview1/spend",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "travel",
+                "v1-preview1",
+                "spend"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Spend-based with IATA code",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"spend_type\": \"air\",\n    \"money\": 100,\n    \"money_unit\": \"eur\",\n    \"spend_location\": {\n        \"iata\": \"AGP\"\n    },\n    \"spend_year\": 2022\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/travel/v1-preview1/spend",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "travel",
+                "v1-preview1",
+                "spend"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Hotels",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hotel_nights\": 5,\n    \"location\": {\n        \"query\": \"Lisbon\"\n    },\n    \"year\": 2024\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/travel/v1-preview1/hotel",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "travel",
+                "v1-preview1",
+                "hotel"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Hotels with coordinates",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"hotel_nights\": 5,\n    \"location\": {\n        \"latitude\": 53.56849,\n        \"longitude\": 9.98335,\n        \"country\":\"DE\"\n    },\n    \"year\": 2024\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/travel/v1-preview1/hotel",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "travel",
+                "v1-preview1",
+                "hotel"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "## Travel Flights\n\nCalculate total estimated emissions produced by travel:\n\n- Distance-based\n    \n- Spend-based\n    \n- Hotel nights"
+    },
+    {
+      "name": "Autopilot (Preview)",
+      "item": [
+        {
+          "name": "Suggest",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"suggest\": {\n        \"domain\": \"general\",\n        \"text\": \"Cement\"\n    },\n    \"max_suggestions\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/autopilot/v1-preview3/suggest",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "autopilot",
+                "v1-preview3",
+                "suggest"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Estimate",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"suggestion_id\": \"giytkntbha4weljxmjstqljugqydkllbmfrdsljqga2ggylemu4wmzdfme-mvsdcolbmizgiljtmy2daljugiygillbmztgeljrgnsdomrzgnrtgodbgm\",\n\t\"parameters\": {\n\t\t\"money\": 100,\n        \"money_unit\": \"usd\"\n\t}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/autopilot/v1-preview3/suggest/estimate",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "autopilot",
+                "v1-preview3",
+                "suggest",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "One-Shot Estimate",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"domain\": \"general\",\n    \"text\": \"Steel\",\n    \"parameters\": {\n        \"money\": 100,\n        \"money_unit\": \"usd\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/autopilot/v1-preview3/estimate",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "autopilot",
+                "v1-preview3",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Autopilot is an AI-powered calculation endpoint designed to automate spend- and activity-based emission estimates. It uses a proprietary natural language processing (NLP) model paired with Climatiq’s scientific expertise to streamline complex emission calculations, making carbon insights accessible to non-experts."
+    },
+    {
+      "name": "CBAM (Preview)",
+      "item": [
+        {
+          "name": "Estimate",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"cn_code\": \"7206 10 00\",\n    \"production_region\": \"CN\",\n    \"weight\": 100,\n    \"weight_unit\": \"t\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/cbam/v1-preview1/estimate",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "cbam",
+                "v1-preview1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Private Data (Preview)",
+      "item": [
+        {
+          "name": "List Private Factors",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/private-data/v1-preview1/private-factors",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "private-data",
+                "v1-preview1",
+                "private-factors"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Private Factor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"activity_id\": \"my_private_factor_id\",\n    \"name\": \"My Private Factor\",\n    \"region\": \"US\",\n    \"year\": 2023,\n    \"unit\": \"mile\",\n    \"calculation_method\": \"ar5\",\n    \"co2e_total\": 123.45,\n    \"lca_activity\": \"manufacturing_process\",\n    \"sector\": \"Energy\",\n    \"category\": \"Power Generation\",\n    \"uncertainty\": 10,\n    \"source\": \"Sample Source\",\n    \"description\": \"Example factor for demonstration purposes\",\n    \"source_link\": \"https://example.com/emission-factor\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/private-data/v1-preview1/private-factors",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "private-data",
+                "v1-preview1",
+                "private-factors"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Private Factor",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"activity_id\": \"my_private_factor_id\",\n    \"name\": \"My Private Factor\",\n    \"region\": \"US\",\n    \"year\": 2023,\n    \"unit\": \"mile\",\n    \"calculation_method\": \"ar5\",\n    \"co2e_total\": 123.45,\n    \"lca_activity\": \"manufacturing_process\",\n    \"sector\": \"Energy\",\n    \"category\": \"Power Generation\",\n    \"uncertainty\": 10,\n    \"source\": \"Sample Source\",\n    \"description\": \"Example factor for demonstration purposes\",\n    \"source_link\": \"https://example.com/emission-factor\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/private-data/v1-preview1/private-factors/<id>",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "private-data",
+                "v1-preview1",
+                "private-factors",
+                "<id>"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Private Factor (Batch)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n    {\n        \"activity_id\": \"my_private_factor_id_1\",\n        \"name\": \"My Private Factor\",\n        \"region\": \"US\",\n        \"year\": 2023,\n        \"unit\": \"mile\",\n        \"calculation_method\": \"ar5\",\n        \"co2e_total\": 123.5,\n        \"lca_activity\": \"manufacturing_process\",\n        \"sector\": \"Energy\",\n        \"category\": \"Power Generation\",\n        \"uncertainty\": 10,\n        \"source\": \"Sample Source\",\n        \"description\": \"Example factor for demonstration purposes\",\n        \"source_link\": \"https://example.com/emission-factor\"\n    },\n    {\n        \"activity_id\": \"my_private_factor_id_2\",\n        \"name\": \"My Second Private Factor\",\n        \"region\": \"US\",\n        \"year\": 2023,\n        \"unit\": \"mile\",\n        \"calculation_method\": \"ar5\",\n        \"co2e_total\": 123.5,\n        \"lca_activity\": \"manufacturing_process\",\n        \"sector\": \"Energy\",\n        \"category\": \"Power Generation\",\n        \"uncertainty\": 10,\n        \"source\": \"Sample Source\",\n        \"description\": \"Example factor for demonstration purposes\",\n        \"source_link\": \"https://example.com/emission-factor\"\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/private-data/v1-preview1/private-factors/batch",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "private-data",
+                "v1-preview1",
+                "private-factors",
+                "batch"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product Carbon Footprint (PCF) (Preview)",
+      "item": [
+        {
+          "name": "Estimate",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{API_KEY}}",
+                "type": "text"
+              },
+              {
+                "key": "",
+                "value": "",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"product\": \"Wooden chair\",\n    \"manufacturing\": {\n        \"manufacturing_year\": 2023,\n        \"location\": {\n            \"query\": \"Ontario\"\n        },\n        \"energy\": {\n            \"energy\": 1.64,\n            \"energy_unit\": \"kWh\"\n        }\n    },\n    \"components\": [\n        {\n            \"category\": \"Wood\",\n            \"origin\": {\n                \"query\": \"Quebec\"\n            },\n            \"weight\": {\n                \"weight\": 8,\n                \"weight_unit\": \"kg\"\n            }\n        },\n        {\n            \"category\": \"Wood glue\",\n            \"origin\": {\n                \"locode\": \"IN-BOM\"\n            },\n            \"weight\": {\n                \"weight\": 0.15,\n                \"weight_unit\": \"kg\"\n            },\n            \"transport_mode\": \"air\"\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{PREVIEW_V1_BASE_URL}}/pcf/v1-preview1/estimate",
+              "host": [
+                "{{PREVIEW_V1_BASE_URL}}"
+              ],
+              "path": [
+                "pcf",
+                "v1-preview1",
+                "estimate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "https://api.climatiq.io"
+    },
+    {
+      "key": "PREVIEW_V1_BASE_URL",
+      "value": "https://preview.api.climatiq.io",
+      "type": "string"
+    },
+    {
+      "key": "DATA_VERSION",
+      "value": "20.20",
+      "type": "string"
+    },
+    {
+      "key": "API_KEY",
+      "value": "Set api key",
+      "type": "string"
+    }
+  ]
+}

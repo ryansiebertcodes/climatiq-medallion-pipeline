@@ -13,7 +13,7 @@
             <mxPoint x="500" y="340" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="if3Ss7LNdMrihXFWUeQy-28" connectable="0" parent="XV0f4pergCoFPn_7m8tc-20" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;div&gt;HTTP GET /data/v1/search&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;HTTP POST /data/v1/estimate/batch&quot;&lt;/div&gt;" vertex="1">
+        <mxCell id="if3Ss7LNdMrihXFWUeQy-28" connectable="0" parent="XV0f4pergCoFPn_7m8tc-20" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;div&gt;HTTP GET /data/v1/search&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;HTTP POST /data/v1/estimate/batch&lt;/div&gt;" vertex="1">
           <mxGeometry relative="1" x="-0.1333" y="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -41,9 +41,6 @@
         <mxCell id="XV0f4pergCoFPn_7m8tc-27" parent="if3Ss7LNdMrihXFWUeQy-21" style="text;whiteSpace=wrap;html=1;fillColor=#996147;fillStyle=solid;strokeColor=default;align=center;fontColor=#3D1F00;verticalAlign=middle;container=0;" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;bronze.emission_factors&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="30" width="140" x="20" y="75" as="geometry" />
         </mxCell>
-        <mxCell id="if3Ss7LNdMrihXFWUeQy-20" edge="1" parent="if3Ss7LNdMrihXFWUeQy-21" source="XV0f4pergCoFPn_7m8tc-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" target="XV0f4pergCoFPn_7m8tc-8">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="if3Ss7LNdMrihXFWUeQy-29" connectable="0" parent="1" style="group" value="" vertex="1">
           <mxGeometry height="180" width="200" x="325" y="360" as="geometry" />
         </mxCell>
@@ -65,7 +62,7 @@
             <mxPoint x="220" y="620" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="if3Ss7LNdMrihXFWUeQy-31" connectable="0" parent="if3Ss7LNdMrihXFWUeQy-30" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;div&gt;Dimensional model load&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;Surrogate key assignment&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;Fact table at estimate grain&quot;&lt;/div&gt;" vertex="1">
+        <mxCell id="if3Ss7LNdMrihXFWUeQy-31" connectable="0" parent="if3Ss7LNdMrihXFWUeQy-30" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;div&gt;Dimensional model load&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;Surrogate key assignment&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;Fact table at estimate grain&lt;/div&gt;" vertex="1">
           <mxGeometry relative="1" x="-0.24" y="3" as="geometry">
             <mxPoint x="-7" y="10" as="offset" />
           </mxGeometry>
@@ -94,7 +91,7 @@
         <mxCell id="if3Ss7LNdMrihXFWUeQy-42" edge="1" parent="1" source="if3Ss7LNdMrihXFWUeQy-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="if3Ss7LNdMrihXFWUeQy-23">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="if3Ss7LNdMrihXFWUeQy-54" connectable="0" parent="if3Ss7LNdMrihXFWUeQy-42" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Aggregated by country/sector/year" vertex="1">
+        <mxCell id="if3Ss7LNdMrihXFWUeQy-54" connectable="0" parent="if3Ss7LNdMrihXFWUeQy-42" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#f5f5f5;labelBorderColor=#666666;" value="Aggregated by country/sector/year" vertex="1">
           <mxGeometry relative="1" x="-0.0123" y="2" as="geometry">
             <mxPoint x="2" y="-1" as="offset" />
           </mxGeometry>

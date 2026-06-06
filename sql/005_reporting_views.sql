@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW gold.emission_factors_vw AS
+CREATE OR REPLACE VIEW gold.emission_factors_fact_vw AS
 SELECT
     r.country_name,
     s.sector_name,
@@ -11,7 +11,7 @@ SELECT
     MAX(f.co2e)                        AS max_co2e,
     AVG(f.co2e / f.activity_value)     AS avg_factor,
     COUNT(*)                           AS record_count
-FROM gold.emission_factors f
+FROM gold.emission_factors_fact f
 JOIN gold.region_dim r ON f.region_dim_id = r.region_dim_id
 JOIN gold.sector_dim s ON f.sector_dim_id = s.sector_dim_id
 JOIN gold.year_dim y   ON f.year_dim_id   = y.year_dim_id

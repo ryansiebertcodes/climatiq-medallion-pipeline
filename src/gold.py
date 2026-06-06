@@ -79,7 +79,7 @@ def load_region_dim(conn):
 
 def load_emissions_fact(conn):
     sql = """
-        INSERT INTO gold.emission_factors (
+        INSERT INTO gold.emission_factors_fact (
             region_dim_id,
             sector_dim_id,
             year_dim_id,

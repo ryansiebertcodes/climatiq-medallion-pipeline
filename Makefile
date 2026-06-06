@@ -49,4 +49,4 @@ db-truncate-s:
 	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE silver.regions, silver.emission_factors, silver.estimates RESTART IDENTITY;"
 
 db-truncate-g:
-	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE gold.emission_factors, gold.year_dim, gold.sector_dim, gold.region_dim RESTART IDENTITY CASCADE;"
+	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE gold.emission_factors_fact, gold.year_dim, gold.sector_dim, gold.region_dim RESTART IDENTITY CASCADE;"

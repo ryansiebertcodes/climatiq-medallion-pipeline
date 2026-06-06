@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS gold.year_dim (
 
 
 --Facts
-CREATE TABLE IF NOT EXISTS gold.emission_factors (
+CREATE TABLE IF NOT EXISTS gold.emission_factors_fact (
     emission_factors_fact_id   SERIAL PRIMARY KEY,
     region_dim_id              INTEGER REFERENCES gold.region_dim(region_dim_id),
     sector_dim_id              INTEGER REFERENCES gold.sector_dim(sector_dim_id),

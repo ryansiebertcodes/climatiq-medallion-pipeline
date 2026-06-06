@@ -22,7 +22,7 @@ query = """
         max_co2e,
         avg_factor,
         record_count
-    FROM gold.emission_factors_vw;
+    FROM gold.emission_factors_fact_vw;
 """
 
 df = pd.read_sql(query, conn)     # normal pandas

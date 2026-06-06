@@ -2,26 +2,9 @@
 
 A production-style data engineering pipeline implementing the **Bronze → Silver → Gold** medallion architecture, ingesting carbon emission factor data from the [Climatiq API](https://www.climatiq.io/) into PostgreSQL with a live Streamlit dashboard.
 
-## Architecture
+## Architecture Diagram
 
-```
-Climatiq API
-     │
-     ▼
-Bronze Layer  →  Raw API responses stored as JSONB (truncate-reload)
-     │
-     ▼
-Silver Layer  →  Typed columns extracted from JSONB, duplicates removed, regions enriched
-     │
-     ▼
-Gold Layer    →  Dimensional model (SectorDim, RegionDim, YearDim) + fact table
-     │
-     ▼
-Reporting View  →  gold.emission_factors_vw (pre-joined, aggregated)
-     │
-     ▼
-Streamlit Dashboard  →  Interactive filters by country, sector, year
-```
+![Architecture Diagram](docs/architecture_diagram.png)
 
 ## Tech Stack
 
@@ -40,7 +23,7 @@ src/
 ├── transformation.py   # Silver: extract JSONB into typed columns, enrich regions
 ├── loading.py          # Bronze: insert raw data into PostgreSQL
 ├── gold.py             # Gold: populate dimensional model and fact table
-├── dashboard.py        # Streamlit dashboard reading from gold.emission_factors_vw
+├── dashboard.py        # Streamlit dashboard reading from gold.emission_factors_fact_vw
 └── db.py               # Shared database connection
 sql/
 ├── 001_create_database.sql
@@ -122,5 +105,5 @@ Each medallion layer lives in its own schema:
 | `gold` | `region_dim` | Region dimension with country name and source lineage |
 | `gold` | `sector_dim` | Sector dimension with source lineage |
 | `gold` | `year_dim` | Year dimension with source lineage |
-| `gold` | `emission_factors` | Fact table — one row per estimate |
-| `gold` | `emission_factors_vw` | Reporting view — aggregated by country, sector, year |
+| `gold` | `emission_factors_fact` | Fact table — one row per estimate |
+| `gold` | `emission_factors_fact_vw` | Reporting view — aggregated by country, sector, year |

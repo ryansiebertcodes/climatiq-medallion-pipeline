@@ -8,31 +8,32 @@ BASE_URL = "https://api.climatiq.io/data/v1"
 API_KEY = os.environ["CLIMATIQ_API_KEY"]
 HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 DATA_VERSION = "20.20"
-RECORD_CAP = 500
+RECORD_CAP = 9999999
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-SECTORS = ["Energy", "Transport"]
-# SECTORS = [
-#     "Agriculture/Hunting/Forestry/Fishing",
-#     "Buildings and Infrastructure",
-#     "Consumer Goods and Services",
-#     "Education",
-#     "Energy",
-#     "Equipment",
-#     "Health and Social Care",
-#     "Information and Communication",
-#     "Insurance and Financial Services",
-#     "Land Use",
-#     "Materials and Manufacturing",
-#     "Organizational Activities",
-#     "Refrigerants and Fugitive Gases",
-#     "Restaurants and Accommodation",
-#     "Transport",
-#     "Waste",
-#     "Water",
-# ]
+# Test data
+# SECTORS = ["Energy", "Transport"]
+SECTORS = [
+    "Agriculture/Hunting/Forestry/Fishing",
+    "Buildings and Infrastructure",
+    "Consumer Goods and Services",  
+    "Education",
+    "Energy",
+    "Equipment",
+    "Health and Social Care",
+    "Information and Communication",
+    "Insurance and Financial Services",
+    "Land Use",
+    "Materials and Manufacturing",
+    "Organizational Activities",
+    "Refrigerants and Fugitive Gases",
+    "Restaurants and Accommodation",
+    "Transport",
+    "Waste",
+    "Water",
+]
 
 
 def search_emission_factors(
@@ -89,16 +90,16 @@ def batch_estimate(requests_payload: list[dict]) -> list[dict]:
     return resp.json().get("results", [])
 
 
-def build_sample_estimates(factors: list[dict]) -> list[dict]:
+def fetch_all_estimates(factors: list[dict]) -> list[dict]:
     """
-    Build a batch payload from factors that use kWh (Energy unit type),
+    Fetch estimates for all energy-unit factors in chunks of 100 (API batch limit),
     standardized to 1000 kWh per factor for cross-region comparison.
     """
-    payload = []
-    for f in factors:
-        if f.get("unit_type") != "Energy":
-            continue
-        payload.append(
+    energy_factors = [f for f in factors if f.get("unit_type") == "Energy"]
+    all_estimates = []
+    for i in range(0, len(energy_factors), 100):
+        chunk = energy_factors[i:i + 100]
+        payload = [
             {
                 "emission_factor": {
                     "activity_id": f["activity_id"],
@@ -108,10 +109,13 @@ def build_sample_estimates(factors: list[dict]) -> list[dict]:
                 },
                 "parameters": {"energy": 1000, "energy_unit": "kWh"},
             }
-        )
-        if len(payload) == 100:  # API batch limit
-            break
-    return payload
+            for f in chunk
+        ]
+        estimates = batch_estimate(payload)
+        all_estimates.extend(estimates)
+        log.info("Fetched estimates chunk %d-%d, total so far: %d", i, i + 100, len(all_estimates))
+        time.sleep(0.5)
+    return all_estimates
 
 
 if __name__ == "__main__":
@@ -120,7 +124,7 @@ if __name__ == "__main__":
         log.info("Fetching factors for sector: %s", sector)
         factors = fetch_all_factors_for_sector(sector)
         for f in factors:
-            f["_sector"] = sector  # tag source sector before storing
+            f["_sector"] = sector
         all_factors.extend(factors)
         log.info("sector=%s total_factors=%d", sector, len(factors))
 
@@ -129,23 +133,7 @@ if __name__ == "__main__":
     conn = get_connection()
     load_emission_factors(conn, all_factors)
 
-    # Sample batch estimate for energy-unit factors
-    sample_payload = build_sample_estimates(all_factors)
-    print(f"sample_payload length: {len(sample_payload)}")
-    if sample_payload:
-        log.info("Running batch estimate on %d energy factors", len(sample_payload))
-        estimates = batch_estimate(sample_payload)
-        log.info("Received %d estimate results", len(estimates))
-        for est in estimates[:3]:
-            log.info(
-                "  activity=%s co2e=%.4f %s",
-                est.get("activity_id"),
-                est.get("co2e"),
-                est.get("co2e_unit"),
-            )
+    estimates = fetch_all_estimates(all_factors)
+    log.info("Total estimates fetched: %d", len(estimates))
+    if estimates:
         load_estimates(conn, estimates)
-
-    # print(conn)
-
-    # for f in all_factors:
-    #     print(f)

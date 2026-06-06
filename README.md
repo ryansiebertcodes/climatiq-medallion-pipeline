@@ -87,7 +87,7 @@ DB_PASS=
 
 ```bash
 # Bronze: fetch from Climatiq API and load raw JSONB into PostgreSQL
-make run
+make extract
 
 # Silver: promote JSONB to typed columns, deduplicate, enrich regions
 make transform

@@ -4,7 +4,7 @@
 install: .venv
 	.venv/bin/pip install -r requirements.txt
 
-run:
+extract:
 	env $(shell cat .env | xargs) .venv/bin/python src/extraction.py
 
 transform:
@@ -49,4 +49,4 @@ db-truncate-s:
 	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE silver.regions, silver.emission_factors, silver.estimates RESTART IDENTITY;"
 
 db-truncate-g:
-	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE gold.year_dim, gold.sector_dim, gold.region_dim", gold.estimate_fact RESTART IDENTITY CASCADE;"
+	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE gold.emission_factors, gold.year_dim, gold.sector_dim, gold.region_dim RESTART IDENTITY CASCADE;"

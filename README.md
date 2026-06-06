@@ -4,7 +4,7 @@ A production-style data engineering pipeline implementing the **Bronze → Silve
 
 ## Architecture Diagram
 
-![Architecture Diagram](docs/architecture_diagram.png)
+![Architecture Diagram](docs/climatiq.drawio.png)
 
 ## Tech Stack
 

@@ -7,7 +7,16 @@ install: .venv
 run:
 	env $(shell cat .env | xargs) .venv/bin/python src/extraction.py
 
-freeze:	
+transform:
+	env $(shell cat .env | xargs) .venv/bin/python src/transformation.py
+
+gold:
+	env $(shell cat .env | xargs) .venv/bin/python src/gold.py
+
+dashboard:
+	env $(shell cat .env | xargs) .venv/bin/streamlit run src/dashboard.py
+
+freeze:
 	.venv/bin/pip freeze > requirements.txt
 
 PSQL=/Applications/Postgres.app/Contents/Versions/18/bin/psql
@@ -24,15 +33,20 @@ db-reset:
 	$(PSQL) -U ryansiebert -d climatiq_pipeline -f sql/999_reset_bronze.sql
 	$(PSQL) -U ryansiebert -d climatiq_pipeline -f sql/002_bronze_schema.sql
 
-db-truncate:
-	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE bronze.emission_factors, bronze.estimates RESTART IDENTITY;"
-
 db-reset-s:
 	$(PSQL) -U ryansiebert -d climatiq_pipeline -f sql/999_reset_silver.sql
 	$(PSQL) -U ryansiebert -d climatiq_pipeline -f sql/003_silver_schema.sql
 
-db-truncate-s:
-	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE silver.emission_factors, silver.estimates RESTART IDENTITY;"
+db-reset-g:
+	$(PSQL) -U ryansiebert -d climatiq_pipeline -f sql/999_reset_gold.sql
+	$(PSQL) -U ryansiebert -d climatiq_pipeline -f sql/004_gold_schema.sql
+	$(PSQL) -U ryansiebert -d climatiq_pipeline -f sql/005_reporting_views.sql
 
-  transform:
-	env $(shell cat .env | xargs) .venv/bin/python src/transformation.py
+db-truncate:
+	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE bronze.emission_factors, bronze.estimates RESTART IDENTITY;"
+
+db-truncate-s:
+	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE silver.regions, silver.emission_factors, silver.estimates RESTART IDENTITY;"
+
+db-truncate-g:
+	$(PSQL) -U ryansiebert -d climatiq_pipeline -c "TRUNCATE gold.year_dim, gold.sector_dim, gold.region_dim", gold.estimate_fact RESTART IDENTITY CASCADE;"

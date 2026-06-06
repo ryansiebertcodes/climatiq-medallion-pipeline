@@ -82,6 +82,7 @@ make transform
 - **Bronze** is a truncate-reload layer — raw data is replaced on each run, preserving source fidelity in JSONB
 - **Silver** deduplicates on `emission_factor.id` — records without a valid ID or with duplicate IDs are excluded via `ON CONFLICT (id) DO NOTHING`
 - In testing, 100 Bronze estimate records reduced to 98 in Silver due to 3 records sharing the same `emission_factor.id` (API duplicate) and 2 records with null IDs
+- **Region enrichment** uses `pycountry` to map ISO alpha-2 codes to full country names. Sub-national codes (e.g. `CA-BC`) fall back to the parent country (`Canada`). Climatiq-specific regional aggregations (`ROW_WF`, `ROW_WE`, `ROW_WM`) represent "Rest of World" groupings with no ISO equivalent and are stored as `"Unknown"`
 
 ## PostgreSQL Schema
 

@@ -3,6 +3,15 @@
 
 CREATE SCHEMA IF NOT EXISTS silver;
 
+/* Normalized region lookup enriched with full country names.
+   Placed in Silver (not Gold) because it is a stable reference dataset
+   shared across multiple Silver tables; enrichment is a Silver-layer
+   responsibility. */
+CREATE TABLE IF NOT EXISTS silver.regions (
+    region_code  TEXT PRIMARY KEY,
+    country_name TEXT
+);
+
 CREATE TABLE IF NOT EXISTS silver.emission_factors (
     id          TEXT PRIMARY KEY,
     activity_id TEXT,

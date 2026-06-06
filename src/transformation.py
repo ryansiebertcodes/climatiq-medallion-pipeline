@@ -3,6 +3,45 @@ import psycopg2
 from datetime import datetime, timezone
 import json
 from db import get_connection
+import pycountry
+
+
+# Region is country id in this dataset
+def get_enriched_country_name(region):
+    country = pycountry.countries.get(alpha_2=region)
+    if country:
+        return country.name
+    parent_code = region.split("-")[0]
+    parent = pycountry.countries.get(alpha_2=parent_code)
+    return parent.name if parent else "Unknown"
+    
+# Normalized region lookup enriched with full country names via pycountry.                                                                          
+# Placed in Silver (not Gold) because it is a stable reference dataset used                                                                         
+# by multiple Silver tables, and enrichment is a Silver-layer responsibility.  
+def transform_regions(conn):
+      # Populate silver.regions by pulling distinct region codes from bronze
+      # and enriching with full country names via pycountry.
+      # We call pycountry once per unique code rather than once per row —
+      # avoids redundant lookups across thousands of emission factor records.
+      cur = conn.cursor()
+      cur.execute("""
+          SELECT DISTINCT raw_data->>'region'
+          FROM bronze.emission_factors
+          WHERE raw_data->>'region' IS NOT NULL;
+      """)
+      regions = cur.fetchall()
+
+      for (region_code,) in regions:
+          country_name = get_enriched_country_name(region_code)
+          cur.execute(
+              """INSERT INTO silver.regions (region_code, country_name)
+                 VALUES (%s, %s)
+                 ON CONFLICT (region_code) DO NOTHING;""",
+              (region_code, country_name),
+          )
+
+      conn.commit()
+      cur.close()
 
 
 def transform_emission_factors(conn):
@@ -75,6 +114,7 @@ def transform_estimates(conn):
 
 if __name__ == "__main__":
     conn = get_connection()
+    transform_regions(conn)
     transform_emission_factors(conn)
     transform_estimates(conn)
     conn.close()
